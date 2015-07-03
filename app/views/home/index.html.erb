@@ -1,0 +1,27 @@
+<!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer">
+            <h1>ברוך הבא ל Shopify - מערכת לניהול קניות משותפות</h1>
+            <p>בשביל להתחיל בחר רשימת קניות קיימת והוסף לה מוצרים</p>
+            <p>או צור רשימת קניות חדשה</p>
+            <p><a class="btn btn-primary btn-large">צור רשימת קניות!</a>
+            </p>
+        </header>
+
+        <hr>
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>רשימות אחרונות</h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+
+            <%= render partial: "shopping_list", collection: @shopping_lists %>
+
+            
+
+        </div>

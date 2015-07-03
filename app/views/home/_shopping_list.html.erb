@@ -1,0 +1,16 @@
+<div class="col-md-3 col-sm-6 hero-feature">
+    <div class="thumbnail">
+        <% if shopping_list.image? %>
+            <%= image_tag shopping_list.image.small.url %>
+        <% else %>
+            <%= image_tag "To-do_List-256.png", size: "64x64" %>
+        <% end %>
+        <div class="caption">
+            <h3><%= shopping_list.title %></h3>
+            <p>נוצר על ידי <%= shopping_list.user.name %> בתאריך <%= shopping_list.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+            <p>
+                <a href="#" class="btn btn-default">פרטים</a> <a href="#" class="btn btn-primary">עריכה</a>
+            </p>
+        </div>
+    </div>
+</div>
