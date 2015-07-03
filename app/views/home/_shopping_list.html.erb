@@ -9,7 +9,8 @@
             <h3><%= shopping_list.title %></h3>
             <p>נוצר על ידי <%= shopping_list.user.name %> בתאריך <%= shopping_list.created_at.strftime("%d/%m/%Y %H:%M") %></p>
             <p>
-                <a href="#" class="btn btn-default">פרטים</a> <a href="#" class="btn btn-primary">עריכה</a>
+                <%= link_to "פרטים", shopping_list_path(shopping_list), class: "btn btn-default" %>
+                <%= link_to "עריכה", edit_shopping_list_path(shopping_list), class: "btn btn-primary" %>
             </p>
         </div>
     </div>

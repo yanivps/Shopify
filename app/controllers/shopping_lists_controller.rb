@@ -3,6 +3,7 @@ class ShoppingListsController < ApplicationController
   end
 
   def show
+    @shopping_list = ShoppingList.find(params[:id])
   end
 
   def new

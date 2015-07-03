@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
   
-  get 'shopping_lists/index'
-
-  get 'shopping_lists/show'
-
-  get 'shopping_lists/new'
-
-  get 'shopping_lists/edit'
+  resources :shopping_lists
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
