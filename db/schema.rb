@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703212711) do
+ActiveRecord::Schema.define(version: 20150704075211) do
 
   create_table "measures", force: :cascade do |t|
     t.integer  "unit",       limit: 4,  default: 0, null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150703212711) do
     t.integer  "shopping_list_id", limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "image",            limit: 255
   end
 
   add_index "products", ["shopping_list_id"], name: "index_products_on_shopping_list_id", using: :btree
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150703212711) do
     t.boolean  "was_bought", limit: 1
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "image",      limit: 255
   end
 
   add_index "shopping_lists", ["user_id"], name: "index_shopping_lists_on_user_id", using: :btree
