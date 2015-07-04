@@ -12,17 +12,28 @@ yaniv.save!
 alon = User.new(name: "Alon", email: "alon@test.com", password: "12341234")
 alon.save!
 
-lists = []
-lists << ShoppingList.create!(title: "רשימת קניות ראשונה שלי", user: yaniv)
-lists << ShoppingList.create!(title: "רשימה דחופה!", user: alon)
+users = User.all
 
-Product.create!(title: "טבסקו", shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :units))
-Product.create!(title: "ספרייט", shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1.5, unit: :liters))
-Product.create!(title: "קוטג'' 9%", shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 1, unit: :units))
-Product.create!(title: "שיבולת שועל", shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 750, unit: :grams))
-Product.create!(title: "קמח רגיל", shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :kilograms))
+
+ShoppingList.create!(title: "רשימת קניות ראשונה שלי", user: yaniv)
+ShoppingList.create!(title: "רשימה דחופה!", user: alon)
+
+lists = ShoppingList.all
+
+
+Product.create!(title: "טבסקו", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :items))
+Product.create!(title: "ספרייט", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1.5, unit: :liters))
+Product.create!(title: "קוטג' 9%", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 1, unit: :items))
+Product.create!(title: "שיבולת שועל", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 750, unit: :grams))
+Product.create!(title: "קמח רגיל", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :kilograms))
+
+15.times do
+  Product.create!(title: Faker::Commerce.product_name, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
+end
 
 
 puts "Seed done"
 puts "#{ShoppingList.count} Shopping Lists created"
 puts "#{Product.count} Products created"
+
+

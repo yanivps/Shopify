@@ -4,4 +4,6 @@ class Product < ActiveRecord::Base
   has_one :measure
 
   mount_uploader :image, ProductImageUploader
+
+  validates :title, presence: true
 end

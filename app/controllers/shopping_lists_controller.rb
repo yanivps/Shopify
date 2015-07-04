@@ -4,6 +4,7 @@ class ShoppingListsController < ApplicationController
 
   def show
     @shopping_list = ShoppingList.find(params[:id])
+    @products = @shopping_list.products
   end
 
   def new
