@@ -26,6 +26,14 @@ he:
         title: "שם"
         description: "הערות"
         quantity: "כמות"
+      user:
+        name: "שם משתמש"
+        email: "אימייל"
+        password: "סיסמא"
+        password_confirmation: "אימות סיסמא"
+        remember_me: "זכור אותי"
+        current_password: "סיסמא נוכחית"
+        email_notifications: "התראות במייל"
 
   measure:
     items: "יחידות"

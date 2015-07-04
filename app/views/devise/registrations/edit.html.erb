@@ -1,0 +1,55 @@
+<h2>ערוך משתמש</h2>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: 'form-control', autofocus: true %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password %> <i>(השאר ריק אם אין ברצונך לשנות)</i><br />
+        <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(אנחנו צריכים את סיסמתך הנוכחית על מנת לאמת את השינויים)</i><br />
+        <%= f.password_field :current_password, class: 'form-control', autocomplete: "off" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "עדכן", class: "btn btn-success" %>
+      </div>
+    <% end %>
+
+    <h3>ערוך מידע אישי</h3>
+        <%= form_for(current_user) do |f| %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter name", autofocus: true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email_notifications %>
+            <%= f.check_box :email_notifications %>
+            <p class="help-block">קבל התראות במייל</p>
+          </div>
+          <div class="form-group">
+            <%= f.submit "עדכן", class: 'btn btn-success' %>
+          </div>
+        <% end %>
+
+    <%= link_to "חזור", :back %>
+  </div>
+</div>
