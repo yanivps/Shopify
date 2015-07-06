@@ -2,4 +2,25 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "heroic-features";
+@import "shopping_lists";
 @import "bootstrap-rtl.min";
+
+.user-info {
+  margin-top: 13px;
+}
+
+.hide {
+	display: none;
+}
+
+.left-space {
+	margin-left: 5px
+}
+
+.light-black {
+	color: #222
+}
+
+.inline {
+	display: inline;
+}

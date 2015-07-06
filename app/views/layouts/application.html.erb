@@ -20,14 +20,33 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Shopify</a>
+                <%= link_to "Shopify", root_path, class: "navbar-brand" %>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">רשימת קניות</a>
+                        <%= link_to "רשימות קניות", shopping_lists_path %>
                     </li>
+                </ul>
+                <ul class="pull-left user-info">
+                    <% if current_user %>
+                        
+                        שלום <%= current_user.name || current_user.email %>!
+
+                       <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
+                            <span class="glyphicon glyphicon-user"></span>
+                       <% end %>
+
+                        <%= link_to destroy_user_session_path, method: :delete, 
+                            class: 'btn btn-primary btn-sm' do %>
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        <% end %>
+
+                    <% else %>
+                        <%= link_to "הרשם", new_user_registration_path %> או
+                        <%= link_to "התחבר", new_user_session_path %>
+                    <% end %>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -43,10 +62,10 @@
 				<button class="close" data-dismiss="alert">&times;</button>
 				<%= flash[:notice] %>
 			</div>
-		<% elsif flash[:fail] %>
+		<% elsif flash[:error] %>
 			<div class="alert alert-danger">
 				<button class="close" data-dismiss="alert">&times;</button>
-				<%= flash[:fail] %>
+				<%= flash[:error] %>
 			</div>
 		<% elsif flash[:alert] %>
 			<div class="alert alert-warning">
@@ -64,7 +83,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>כל הזכויות שמורות &copy; Shopify 2015</p>
                 </div>
             </div>
         </footer>

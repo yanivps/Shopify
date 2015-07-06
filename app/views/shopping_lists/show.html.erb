@@ -1,3 +1,39 @@
-<h1>ShoppingLists#show</h1>
-<p>Find me in app/views/shopping_lists/show.html.erb</p>
-<%= @shopping_list.title %>
+<h1><%= @shopping_list.title %></h1>
+
+<%= render partial: "products/products", locals: { products: @products } %>
+
+<h3>הוסף מוצר בודד או <a href="#preset">ממועדפים</a></h3>
+<div class="row">
+	<div class="col-md-6">
+		<%= form_for [@shopping_list, Product.new] do |f| %>
+			<div class='form-group'>
+				<%= f.label :title %>
+				<%= f.text_field :title, class: 'form-control', placeholder: 'הכנס את שם המוצר' %>
+			</div>
+			<div class='form-group'>
+				<%= f.label :description %>
+				<%= f.text_field :description, class: 'form-control' %>
+			</div>
+			
+			<%= f.label :quantity %>
+			<div class='form-inline form-group'>
+				<%= text_field_tag :quantity, "1", class: 'form-control', placeholder: 'הכנס כמות' %>
+				<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, 1)) %>
+			</div>
+			<div class='form-group'>
+				<%= f.submit "הוסף לרשימה", class: "btn btn-primary", :disable_with => 'מוסיף...' %>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-md-12">
+		<h3 id="preset">הוסף ממועדפים</h3>	
+	</div>
+	<div class="col-md-6">
+		<% if @presets.any? %>
+			
+		<% else %>
+			<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
+			<%= link_to "צור חדש", new_preset_path, class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
