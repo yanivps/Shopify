@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     product.shopping_list = @shopping_list
     product.measure = Measure.new(unit: params[:unit].to_i, quantity: params[:quantity])
     if product.save
-      redirect_to shopping_list_path(@shopping_list)
+      redirect_to @shopping_list
     else
       redirect_to root_path
       # render ""
@@ -14,9 +14,30 @@ class ProductsController < ApplicationController
   end
 
   def update
+    shopping_list = ShoppingList.find(params[:shopping_list_id])
+    product = Product.find(params[:id])
+    product.attributes = product_params
+    product.measure = Measure.new(unit: params[:unit].to_i, quantity: params[:quantity])
+    if product.save
+      flash[:notice] = "\"#{product.title}\" עודכן בהצלחה."
+    else
+      flash[:error] = "חלה שגיאה בעדכון הפריט. אנא נסה שוב"
+    end
+
+    redirect_to shopping_list
   end
 
   def destroy
+    shopping_list = ShoppingList.find(params[:shopping_list_id])
+    product = Product.find(params[:id])
+
+    if product.destroy
+      flash[:notice] = "\"#{product.title}\" הוסר מהרשימה."
+    else
+      flash[:error] = "חלה שגיאה בהסרת הפריט. אנא נסה שוב"
+    end
+    
+    redirect_to shopping_list
   end
 
   private

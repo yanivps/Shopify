@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     resources :products, only: [:create, :update, :destroy]
   end
 
+  resources :presets do
+    resources :products, only: [:create, :destroy]
+  end
+
   devise_for :users
 
   resources :users, only: [:update]

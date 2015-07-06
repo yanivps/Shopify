@@ -2,7 +2,7 @@
 
 <%= render partial: "products/products", locals: { products: @products } %>
 
-<h3>הוסף מוצר</h3>
+<h3>הוסף מוצר בודד או <a href="#preset">ממועדפים</a></h3>
 <div class="row">
 	<div class="col-md-6">
 		<%= form_for [@shopping_list, Product.new] do |f| %>
@@ -23,6 +23,17 @@
 			<div class='form-group'>
 				<%= f.submit "הוסף לרשימה", class: "btn btn-primary", :disable_with => 'מוסיף...' %>
 			</div>
+		<% end %>
+	</div>
+	<div class="col-md-12">
+		<h3 id="preset">הוסף ממועדפים</h3>	
+	</div>
+	<div class="col-md-6">
+		<% if @presets.any? %>
+			
+		<% else %>
+			<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
+			<%= link_to "צור חדש", new_preset_path, class: "btn btn-primary" %>
 		<% end %>
 	</div>
 </div>

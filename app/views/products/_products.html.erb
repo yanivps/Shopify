@@ -1,24 +1,56 @@
-<table class="table table-striped table-condensed">
-	<thead>
-		<tr>
-			<th>שם המוצר</th>
-			<th>הערות</th>
-			<th>כמות</th>
-			<th>מבקש</th>
-			<th>נוסף בתאריך</th>
-			<th>תמונה</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% products.each do |product| %>
-			<tr>
-				<td><%= product.title %></td>
-				<td><%= product.description %></td>
-				<td><%= measure_in_words(product.measure) %></td>
-				<td><%= product.user.name %></td>
-				<td><%= product.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-				<td><%= image_tag product.image.url if product.image? %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<%= form_for :product, method: :put, html: { id: "product-form" } do |f| %>
+	<div id="products-list">
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th></th>
+					<th>שם המוצר</th>
+					<th>הערות</th>
+					<th>כמות</th>
+					<th>מבקש</th>
+					<th>נוסף בתאריך</th>
+					<th>תמונה</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% products.each do |product| %>
+					<tr>
+						<td>
+							<% if product.user.id == current_user.id %>
+								<%= link_to [product.shopping_list, product], method: :delete do %>
+									<span class="glyphicon glyphicon-trash light-black left-space"></span>
+								<% end %>
+								<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit light-black"></span></a>
+								<div class='control-wrapper hide inline'>
+									<%= f.submit "עדכן", :disable_with => 'מעדכן...', class: 'btn btn-primary btn-xs update-product-submit', data: {product_id: product.id} %>
+								</div>
+							<% end %>
+						</td>
+						<td>
+							<div class='product-field'><%= product.title %></div>
+							<div class='control-wrapper hide'>
+								<%= f.text_field :title, value: product.title, disabled: :disabled, class: "form-control" %>
+							</div>
+						</td>
+						<td>
+							<div class='product-field'><%= product.description %></div>
+							<div class='control-wrapper hide'>
+								<%= f.text_field :description, value: product.description, disabled: :disabled, class: "form-control" %>
+							</div>
+						</td>
+						<td>
+							<div class='product-field'><%= measure_in_words(product.measure) %></div>
+							<div class='form-inline control-wrapper hide'>
+								<%= text_field_tag :quantity, number_with_precision(product.measure.quantity, strip_insignificant_zeros: true, precisiion: 2), disabled: :disabled, class: "form-control", style: "width: 75px" %>
+								<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, Measure.units[product.measure.unit]), { disabled: :disabled }) %>
+							</div>
+						</td>
+						<td><%= product.user.name %></td>
+						<td><%= product.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+						<td><%= image_tag product.image.url if product.image? %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+<% end %>

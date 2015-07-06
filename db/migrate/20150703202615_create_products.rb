@@ -5,10 +5,12 @@ class CreateProducts < ActiveRecord::Migration
       t.text :description
       t.references :user, index: true
       t.references :shopping_list, index: true
+      t.references :preset, index: true
 
       t.timestamps null: false
     end
     add_foreign_key :products, :users
     add_foreign_key :products, :shopping_lists
+    add_foreign_key :products, :presets
   end
 end

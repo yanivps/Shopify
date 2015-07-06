@@ -37,20 +37,22 @@ ActiveRecord::Schema.define(version: 20150704233621) do
     t.text     "description",      limit: 65535
     t.integer  "user_id",          limit: 4
     t.integer  "shopping_list_id", limit: 4
+    t.integer  "preset_id",        limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "image",            limit: 255
   end
 
+  add_index "products", ["preset_id"], name: "index_products_on_preset_id", using: :btree
   add_index "products", ["shopping_list_id"], name: "index_products_on_shopping_list_id", using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "shopping_lists", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.string   "title",      limit: 255
-    t.boolean  "was_bought", limit: 1
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "was_bought", limit: 1,   default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "image",      limit: 255
   end
 
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 20150704233621) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "presets", "users"
+  add_foreign_key "products", "presets"
   add_foreign_key "products", "shopping_lists"
   add_foreign_key "products", "shopping_lists"
   add_foreign_key "products", "users"
