@@ -14,7 +14,7 @@
 		<% if @presets && @presets.any? %>
 			<div class="row">
 				<div class="col-md-6 search-form">
-					<%= form_tag(presets_path, :method => "get", id: "presetsSearch") do %>
+					<%= form_tag(shopping_list_presets_path(@shopping_list), :method => "get", id: "presetsSearch") do %>
 						<%= hidden_field_tag :shopping_list_id, @shopping_list.id %>
 					  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
 					<% end %>
@@ -22,8 +22,8 @@
 			</div>
 			
 			<div id="presets">
-				<%= render partial: "presets/preset", collection: @presets, locals: { shopping_list: @shopping_list } %>
-				<%= js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', :params => { :controller => "presets", :action => "index" } %>
+				<%= render partial: "shopping_lists/presets/preset", collection: @presets , locals: { shopping_list: @shopping_list } %>
+				<%= js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', params: { controller: "shopping_lists/presets", action: "index", shopping_list_id: @shopping_list.id } %>
 			</div>
 			
 		<% else %>

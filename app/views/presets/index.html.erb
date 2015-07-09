@@ -10,7 +10,7 @@
 	</div>
 	
 	<div id="presets">
-		<%= render partial: "presets/preset", collection: @presets, locals: {shopping_list: nil} %>
+		<%= render @presets %>
 		<%= will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא' %>
 	</div>
 <% end %>

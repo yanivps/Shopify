@@ -1,8 +1,10 @@
 <div class="preset">
 	<div class="preset-header">
+		<a href="#" class="preset-products-toggler"><span class="glyphicon glyphicon-plus light-black"></span></a>
 		<h4 class="inline"><%= link_to preset.title, preset %></h4>
+		<%= link_to "הוסף", add_to_list_shopping_list_preset_path(shopping_list, preset), class: "btn btn-success btn-sm", method: :post %>
 	</div>
-	<div class="preset-products">
+	<div class="preset-products hide">
 		<table class="table table-striped table-condensed">
 			<thead>
 				<tr>

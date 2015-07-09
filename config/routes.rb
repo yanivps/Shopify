@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :shopping_lists do
     resources :products, only: [:create, :update, :destroy], controller: "shopping_lists/products"
-    resources :presets do
+    resources :presets, only: [:index], controller: "shopping_lists/presets" do
       member do
         post :add_to_list
       end
