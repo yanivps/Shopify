@@ -1,39 +1,41 @@
 <h1><%= @shopping_list.title %></h1>
 
-<%= render partial: "products/products", locals: { products: @products } %>
+<%= render partial: "shopping_lists/products/products", locals: { products: @products } %>
 
-<h3>הוסף מוצר בודד או <a href="#preset">ממועדפים</a></h3>
+<h3>הוסף מוצר בודד או <a href="#addFromPreset">ממועדפים</a></h3>
 <div class="row">
 	<div class="col-md-6">
-		<%= form_for [@shopping_list, Product.new] do |f| %>
-			<div class='form-group'>
-				<%= f.label :title %>
-				<%= f.text_field :title, class: 'form-control', placeholder: 'הכנס את שם המוצר' %>
-			</div>
-			<div class='form-group'>
-				<%= f.label :description %>
-				<%= f.text_field :description, class: 'form-control' %>
-			</div>
-			
-			<%= f.label :quantity %>
-			<div class='form-inline form-group'>
-				<%= text_field_tag :quantity, "1", class: 'form-control', placeholder: 'הכנס כמות' %>
-				<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, 1)) %>
-			</div>
-			<div class='form-group'>
-				<%= f.submit "הוסף לרשימה", class: "btn btn-primary", :disable_with => 'מוסיף...' %>
-			</div>
-		<% end %>
+		<%= render partial: "products/form", locals: {product_container: @shopping_list} %>
 	</div>
 	<div class="col-md-12">
-		<h3 id="preset">הוסף ממועדפים</h3>	
+		<h3 id="addFromPreset">הוסף ממועדפים</h3>	
 	</div>
 	<div class="col-md-6">
-		<% if @presets.any? %>
+		<% if @presets && @presets.any? %>
+			<div class="row">
+				<div class="col-md-6 search-form">
+					<%= form_tag(presets_path, :method => "get", id: "presetsSearch") do %>
+						<%= hidden_field_tag :shopping_list_id, @shopping_list.id %>
+					  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
+					<% end %>
+				</div>
+			</div>
+			
+			<div id="presets">
+				<%= render partial: "presets/preset", collection: @presets, locals: { shopping_list: @shopping_list } %>
+				<%= js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', :params => { :controller => "presets", :action => "index" } %>
+			</div>
 			
 		<% else %>
 			<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
-			<%= link_to "צור חדש", new_preset_path, class: "btn btn-primary" %>
 		<% end %>
+		<!-- open alert with text and area to write preset name and description. this creates the preset with presets controller and redirect to this preset page with product form to add products to preset -->
+		<!-- Button trigger modal -->
+		<div>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+			  צור מועדף חדש
+			</button>
+		</div>
+		<%= render partial: "presets/form_modal" %>
 	</div>
 </div>

@@ -31,6 +31,14 @@ Product.create!(title: "קמח רגיל", description: Faker::Lorem.sentence, sh
   Product.create!(title: Faker::Commerce.product_name, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
 end
 
+15.times do
+  Preset.create!(title: Faker::Commerce.product_name, user: users.sample)
+end
+presets = Preset.all
+15.times do
+  Product.create!(title: Faker::Commerce.product_name, description: Faker::Lorem.sentence, preset: presets.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
+end
+
 
 puts "Seed done"
 puts "#{ShoppingList.count} Shopping Lists created"

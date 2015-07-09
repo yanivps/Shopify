@@ -1,0 +1,16 @@
+<h1>מועדפים</h1>
+
+<% if @presets && @presets.any? %>
+	<div class="row">
+		<div class="col-md-6 search-form">
+			<%= form_tag(presets_path, :method => "get", id: "presetsSearch") do %>
+			  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
+			<% end %>
+		</div>
+	</div>
+	
+	<div id="presets">
+		<%= render partial: "presets/preset", collection: @presets, locals: {shopping_list: nil} %>
+		<%= will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא' %>
+	</div>
+<% end %>

@@ -1,0 +1,7 @@
+<% if @presets.any? %>
+	var html = "<%= escape_javascript( render partial: 'presets/preset', collection: @presets, locals: {shopping_list: @shopping_list } ) %>"
+	html += "<%= escape_javascript(js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', :params => { :controller => 'presets', :action => 'index' }) %>"
+	$('#presets').html(html);
+<% else %>
+	$('#presets').html("<h4>אין תוצאות</h4>");
+<% end %>

@@ -1,0 +1,10 @@
+<h1><%= @preset.title %></h1>
+<%= render partial: "presets/products/products", locals: { products: @products } %>
+
+
+<h3>הוסף מוצר</h3>
+<div class="row">
+	<div class="col-md-6">
+		<%= render partial: "products/form", locals: {product_container: @preset} %>
+	</div>
+</div>

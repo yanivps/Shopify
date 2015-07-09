@@ -29,6 +29,11 @@ var ShoppingList = {
 		$("#products-list").find('.control-wrapper select').each(function() {
 			$(this).attr('data-original-value', this.value)
 		});
+
+		$("#presetsSearch input").keyup(function() {
+	    	$.get($("#presetsSearch").attr("action"), $("#presetsSearch").serialize(), null, "script");
+	    	return false;
+  		});
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {

@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  
+
   resources :shopping_lists do
-    resources :products, only: [:create, :update, :destroy]
+    resources :products, only: [:create, :update, :destroy], controller: "shopping_lists/products"
+    resources :presets do
+      member do
+        post :add_to_list
+      end
+    end
   end
 
   resources :presets do
-    resources :products, only: [:create, :destroy]
+    resources :products, only: [:create, :update, :destroy], controller: "presets/products"
   end
 
   devise_for :users
