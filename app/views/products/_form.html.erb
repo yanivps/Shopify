@@ -1,5 +1,14 @@
-<%= form_for [product_container, Product.new] do |f| %>
-	<div class='form-group'>
+<%= form_for [product_container, product] do |f| %>
+	<% if product.errors.any? %>
+		<div class="alert alert-danger">
+			<ul>
+			<% product.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class='<%= form_has_error_class(product.errors[:title]) %>'>
 		<%= f.label :title %>
 		<%= f.text_field :title, class: 'form-control', placeholder: 'הכנס את שם המוצר' %>
 	</div>
@@ -10,7 +19,7 @@
 	
 	<%= f.label :quantity %>
 	<div class='form-inline form-group'>
-		<%= text_field_tag :quantity, "1", class: 'form-control', placeholder: 'הכנס כמות' %>
+		<%= text_field_tag :quantity, product.measure ? quantity_with_precision(product.measure) : "1", class: 'form-control', placeholder: 'הכנס כמות' %>
 		<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, 1)) %>
 	</div>
 	<div class='form-group'>

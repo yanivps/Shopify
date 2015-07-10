@@ -1,15 +1,18 @@
 class ShoppingLists::ProductsController < ProductsControllerBase
   def create
-    product = super
-    shopping_list = ShoppingList.find(params[:shopping_list_id])
-    product.shopping_list = shopping_list
-    if product.save
-      flash[:notice] = "\"#{product.title}\" נוסף לרשימה."
+    @new_product = super
+    @shopping_list = ShoppingList.find(params[:shopping_list_id])
+    @products = @shopping_list.products
+    
+    @new_product.shopping_list = @shopping_list
+    if @new_product.save
+      flash[:notice] = "\"#{@new_product.title}\" נוסף לרשימה."
+      redirect_to @shopping_list
     else
       flash[:error] = "חלה שגיאה בהוספת המוצר לרשימה. אנא נסה שוב."
+      render "shopping_lists/show"
     end
 
-    redirect_to shopping_list
   end
 
   def update

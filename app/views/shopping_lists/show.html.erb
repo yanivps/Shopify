@@ -5,7 +5,7 @@
 <h3>הוסף מוצר בודד או <a href="#addFromPreset">ממועדפים</a></h3>
 <div class="row">
 	<div class="col-md-6">
-		<%= render partial: "products/form", locals: {product_container: @shopping_list} %>
+		<%= render partial: "products/form", locals: { product_container: @shopping_list, product: @new_product } %>
 	</div>
 	<div class="col-md-12">
 		<h3 id="addFromPreset">הוסף ממועדפים</h3>	
@@ -29,13 +29,10 @@
 		<% else %>
 			<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
 		<% end %>
-		<!-- open alert with text and area to write preset name and description. this creates the preset with presets controller and redirect to this preset page with product form to add products to preset -->
-		<!-- Button trigger modal -->
-		<div>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
-			  צור מועדף חדש
-			</button>
-		</div>
+		
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+		  צור מועדף חדש
+		</button>
 		<%= render partial: "presets/form_modal" %>
 	</div>
 </div>

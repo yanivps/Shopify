@@ -218,5 +218,7 @@ he:
         title: "שם"
         description: "הערות"
         quantity: "כמות"
+      measure:
+        quantity: "כמות"
       preset:
         title: "שם"

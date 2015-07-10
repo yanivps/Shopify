@@ -6,6 +6,7 @@ class PresetsController < ApplicationController
   def show
     @preset = Preset.find(params[:id])
     @products = @preset.products
+    @new_product = Product.new
   end
 
   def create

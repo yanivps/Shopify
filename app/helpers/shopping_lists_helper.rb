@@ -4,4 +4,8 @@ module ShoppingListsHelper
     quantity = number_with_precision(measure.quantity, strip_insignificant_zeros: true, precisiion: 2)
     return "#{quantity} #{text}"
   end
+
+  def quantity_with_precision(measure)
+    number_with_precision(measure.quantity, strip_insignificant_zeros: true, precisiion: 2)
+  end
 end

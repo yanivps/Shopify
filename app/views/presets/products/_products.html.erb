@@ -42,7 +42,7 @@
 							<td>
 								<div class='product-field'><%= measure_in_words(product.measure) %></div>
 								<div class='form-inline control-wrapper hide'>
-									<%= text_field_tag :quantity, number_with_precision(product.measure.quantity, strip_insignificant_zeros: true, precisiion: 2), disabled: :disabled, class: "form-control", style: "width: 75px" %>
+									<%= text_field_tag :quantity, quantity_with_precision(product.measure), disabled: :disabled, class: "form-control", style: "width: 75px" %>
 									<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, Measure.units[product.measure.unit]), { disabled: :disabled }) %>
 								</div>
 							</td>

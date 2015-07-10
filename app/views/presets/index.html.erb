@@ -2,15 +2,34 @@
 
 <% if @presets && @presets.any? %>
 	<div class="row">
-		<div class="col-md-6 search-form">
-			<%= form_tag(presets_path, :method => "get", id: "presetsSearch") do %>
-			  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
+<div class="col-md-12 bottom-space">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+			  צור מועדף חדש
+			</button>
+		</div>
+		<div class="col-md-12 search-form">
+			<%= form_tag(presets_path, :method => "get", class: "form-horizontal") do %>
+				<div class="form-group col-md-6">
+			  	<%= text_field_tag :search, params[:search], class: "form-control col-md-6 left-space", placeholder: "חפש במועדפים" %>
+			  	<%= submit_tag "חפש", class: "btn btn-primary" %>
+				</div>
 			<% end %>
 		</div>
+		
 	</div>
 	
 	<div id="presets">
 		<%= render @presets %>
 		<%= will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא' %>
 	</div>
+<% else %>
+	<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+	  צור מועדף חדש
+	</button>
 <% end %>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+  צור מועדף חדש
+</button> -->
+<%= render partial: "presets/form_modal" %>

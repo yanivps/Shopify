@@ -3,4 +3,8 @@ class ShoppingList < ActiveRecord::Base
   has_many :products
 
   mount_uploader :image, ShoppingListImageUploader
+  
+  validates :title, presence: true
+  validates :user, presence: true
+
 end

@@ -3,6 +3,11 @@ class ProductsControllerBase < ApplicationController
     product = Product.new(product_params)
     product.user = current_user
     product.measure = Measure.new(unit: params[:unit].to_i, quantity: params[:quantity])
+    if !product.measure.valid?
+      product.measure.unit = 0
+      product.measure.quantity = 1
+    end
+    
     return product
   end
 

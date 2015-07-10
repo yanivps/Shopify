@@ -1,15 +1,17 @@
 class Presets::ProductsController < ProductsControllerBase
   def create
-    product = super
-    preset = Preset.find(params[:preset_id])
-    product.preset = preset
-    if product.save
-      flash[:notice] = "\"#{product.title}\" נוסף לרשימה."
+    @new_product = super
+    @preset = Preset.find(params[:preset_id])
+    @products = @preset.products
+
+    @new_product.preset = @preset
+    if @new_product.save
+      flash[:notice] = "\"#{@new_product.title}\" נוסף לרשימה."
+      redirect_to @preset
     else
       flash[:error] = "חלה שגיאה בהוספת המוצר לרשימה. אנא נסה שוב."
+      render "presets/show"
     end
-
-    redirect_to preset
   end
 
   def update
