@@ -2,8 +2,9 @@
 	margin-bottom: 15px;
 }
 
-.shopping-list-bought {
+.shopping-list-bought, .shopping-list-bought:hover {
 	color: #2A910C;
+  	text-decoration: none; /* no underline */
 }
 
 .was-bought-mark {

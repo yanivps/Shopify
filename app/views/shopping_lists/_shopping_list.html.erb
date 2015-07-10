@@ -1,12 +1,12 @@
 <div class="col-md-3 col-sm-6 hero-feature">
     <div class="thumbnail">
         <% if shopping_list.image? %>
-            <%= image_tag shopping_list.image.small.url %>
+            <%= link_to image_tag shopping_list.image.small.url, shopping_list_path(shopping_list) %>
         <% else %>
-            <%= image_tag "To-do_List-256.png", size: "64x64" %>
+            <%= link_to image_tag("To-do_List-256.png", size: "64x64", style: "display: inline"), shopping_list_path(shopping_list) %>
         <% end %>
         <div class="caption">
-            <h3 class="<%= "shopping-list-bought" if shopping_list.was_bought %>"><%= shopping_list.title %></h3>
+            <h3><%= link_to shopping_list.title, shopping_list_path(shopping_list), class: ("#{shopping_list.was_bought? ? 'shopping-list-bought' : 'link-no-style'}") %></h3>
             <p>
                 <span class="was-bought">נקנה?</span>
                 <% if shopping_list.was_bought? %>
