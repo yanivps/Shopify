@@ -1,5 +1,5 @@
 <% if !products.any? %>
-	<h4>אין מוצרים</h3>
+	<h3><strong>רשימת המועדפים ריקה</strong></h3>
 <% else %>
 	<%= form_for :product, method: :put, html: { id: "product-form" } do |f| %>
 		<div id="products-list">	
@@ -19,7 +19,7 @@
 						<tr>
 							<td>
 								<% if product.user && product.user.id == current_user.id %>
-									<%= link_to [product.preset, product], method: :delete do %>
+									<%= link_to [product.preset, product], method: :delete, data: { confirm: 'אתה בטוח?' } do %>
 										<span class="glyphicon glyphicon-trash light-black left-space"></span><% end %>
 									<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit light-black"></span></a>
 									<div class='control-wrapper hide inline'>
@@ -52,6 +52,7 @@
 					<% end %>
 				</tbody>
 			</table>
+			<strong><%= "#{products.count} מוצרים ברשימה" %></strong>
 		</div>
 	<% end %>
 <% end %>

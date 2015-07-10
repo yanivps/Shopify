@@ -3,7 +3,10 @@
     <% if user_signed_in? %>
         <p>בשביל להתחיל בחר רשימת קניות קיימת והוסף לה מוצרים</p>
         <p>או צור רשימת קניות חדשה</p>
-        <p><a class="btn btn-primary btn-large">צור רשימת קניות!</a></p>
+        <button type="button" class="btn btn-primary btn-large" data-toggle="modal" data-target="#shoppingListFormModal">
+          צור רשימת קניות!
+        </button>
+        <%= render partial: "shopping_lists/form_modal", locals: { shopping_list: ShoppingList.new } %>
     <% else %>
         <p>בשביל להתחיל עליך</p>
         <%= link_to "להתחבר", new_user_session_path, class: "btn btn-primary btn-large" %> או

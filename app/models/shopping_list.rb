@@ -1,6 +1,6 @@
 class ShoppingList < ActiveRecord::Base
   belongs_to :user
-  has_many :products
+  has_many :products, dependent: :destroy
 
   mount_uploader :image, ShoppingListImageUploader
   

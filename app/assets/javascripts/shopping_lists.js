@@ -35,7 +35,8 @@ var ShoppingList = {
 	    	return false;
   		});
 
-  		Utils.disableSubmitOnEnter($("#presetsSearch"))
+		Utils.registerClearModalDataOnDismiss($('#shoppingListFormModal'));
+  		Utils.disableSubmitOnEnter($("#presetsSearch"));
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
@@ -76,6 +77,12 @@ var ShoppingList = {
 		});
 
 		$(parent).removeClass('edit-mode')
+	},
+	validateNewShoppingListForm: function() {
+		if ($("#shopping_list_title").val() == "") {
+			$("#shopping_list_title").parent().addClass('has-error')
+			return false;
+		}
 	}
 }
 

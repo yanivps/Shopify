@@ -5,5 +5,11 @@ var Utils = {
 		        return false;
 		    }
 		});
+	},
+	registerClearModalDataOnDismiss: function(modal) {
+		modal.on('hidden.bs.modal', function (e) {
+			$(this).find("input").not(':submit').val('').end()
+			$(this).find('.has-error').removeClass('has-error')
+		});
 	}
 }

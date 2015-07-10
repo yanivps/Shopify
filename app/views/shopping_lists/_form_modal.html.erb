@@ -1,10 +1,10 @@
-<%= form_for preset, html: {onsubmit: "return Preset.validateNewPresetForm();"} do |f| %>
-  <div class="modal fade" id="presetFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<%= form_for shopping_list, html: {onsubmit: "return ShoppingList.validateNewShoppingListForm();"} do |f| %>
+  <div class="modal fade" id="shoppingListFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">מועדף חדש</h4>
+          <h4 class="modal-title" id="myModalLabel">רשימת קניות חדשה</h4>
         </div>
         <div class="modal-body">
           <div class='form-group'>
@@ -15,10 +15,10 @@
         <div class="modal-footer">
           <div class='form-group'>
             <button type="button" class="btn btn-default" data-dismiss="modal">ביטול</button>
-            <% if preset.id? %>
-              <%= f.submit "עדכן מועדף", class: "btn btn-primary", :disable_with => 'יוצר...' %>
+            <% if shopping_list.id? %>
+              <%= f.submit "עדכן רשימה", class: "btn btn-primary", :disable_with => 'יוצר...' %>
             <% else %>
-              <%= f.submit "צור מועדף", class: "btn btn-primary", :disable_with => 'יוצר...' %>
+              <%= f.submit "צור רשימה", class: "btn btn-primary", :disable_with => 'יוצר...' %>
             <% end %>
           </div>
         </div>

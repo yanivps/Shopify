@@ -2,7 +2,7 @@
 
 <% if @presets && @presets.any? %>
 	<div class="row">
-<div class="col-md-12 bottom-space">
+		<div class="col-md-12 bottom-space">
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
 			  צור מועדף חדש
 			</button>
@@ -32,4 +32,4 @@
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
   צור מועדף חדש
 </button> -->
-<%= render partial: "presets/form_modal" %>
+<%= render partial: "presets/form_modal", locals: { preset: Preset.new } %>

@@ -20,6 +20,27 @@ class PresetsController < ApplicationController
     end
   end
 
+  def update
+    preset = Preset.find(params[:id])
+    if preset.update_attributes(preset_params)
+      redirect_to preset
+    else
+      flash[:error] = "חלה שגיאה בעדכון המועדף. אנא נסה שוב."
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    preset = Preset.find(params[:id])
+    if preset.destroy
+      flash[:notice] = "המועדף \"#{preset.title}\" נמחק."
+      redirect_to presets_path
+    else
+      flash[:fail] = "חלה שגיאה במחיקת המועדף. אנא נסה שוב."
+      redirect_to :back
+    end
+  end
+
   private
 
   def preset_params

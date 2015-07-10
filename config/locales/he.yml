@@ -222,3 +222,5 @@ he:
         quantity: "כמות"
       preset:
         title: "שם"
+      shopping_list:
+        title: "שם"
