@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   belongs_to :user
   belongs_to :shopping_list
   belongs_to :preset
-  has_one :measure, validate: true
+  has_one :measure, validate: true, dependent: :destroy
 
   mount_uploader :image, ProductImageUploader
 
