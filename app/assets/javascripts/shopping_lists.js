@@ -34,6 +34,8 @@ var ShoppingList = {
 	    	$.get($("#presetsSearch").attr("action"), $("#presetsSearch").serialize(), null, "script");
 	    	return false;
   		});
+
+  		Utils.disableSubmitOnEnter($("#presetsSearch"))
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
