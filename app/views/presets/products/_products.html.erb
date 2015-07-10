@@ -47,7 +47,7 @@
 								</div>
 							</td>
 							<td><%= product.user.name %></td>
-							<td><%= image_tag product.image.url if product.image? %></td>
+							<td><%= link_to image_tag(product.image.thumb.url), product.image.url if product.image? %></td>
 						</tr>
 					<% end %>
 				</tbody>

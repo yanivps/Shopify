@@ -25,6 +25,7 @@ class ShoppingListImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
+  process :resize_to_fill => [64, 64]
   # process :scale => [200, 300]
   #
   # def scale(width, height)
@@ -32,9 +33,9 @@ class ShoppingListImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :small do
-    process :resize_to_fit => [300, 200]
-  end
+  # version :small do
+  #   process :resize_to_fit => [300, 200]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

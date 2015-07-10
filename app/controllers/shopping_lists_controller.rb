@@ -61,6 +61,6 @@ class ShoppingListsController < ApplicationController
   end
 
   def shopping_list_params
-    params.require(:shopping_list).permit(:title)
+    params.require(:shopping_list).permit(:title, :image)
   end
 end

@@ -218,9 +218,11 @@ he:
         title: "שם"
         description: "הערות"
         quantity: "כמות"
+        image: "תמונה"
       measure:
         quantity: "כמות"
       preset:
         title: "שם"
       shopping_list:
         title: "שם"
+        image: "תמונה"
