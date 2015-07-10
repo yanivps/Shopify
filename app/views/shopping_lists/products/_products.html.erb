@@ -19,7 +19,7 @@
 					<% products.each do |product| %>
 						<tr>
 							<td>
-								<% if product.user && product.user.id == current_user.id %>
+								<% if product.user && product.user.id == current_user.id && !product.shopping_list.was_bought? %>
 									<%= link_to [product.shopping_list, product], method: :delete, data: { confirm: 'אתה בטוח?' } do %>
 										<span class="glyphicon glyphicon-trash light-black left-space"></span><% end %>
 									<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit light-black"></span></a>

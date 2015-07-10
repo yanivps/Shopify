@@ -10,12 +10,6 @@ class ShoppingListsController < ApplicationController
     @new_product = Product.new
   end
 
-  def new
-  end
-
-  def edit
-  end
-
   def create
     shopping_list = ShoppingList.new(shopping_list_params)
     shopping_list.user = current_user
@@ -48,7 +42,23 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def bought
+    set_bought true
+  end
+
+  def un_bought
+    set_bought false
+  end
+
   private
+
+  def set_bought(status)
+    shopping_list = ShoppingList.find(params[:id])
+    if !shopping_list.update_attributes(was_bought: status)
+      flash[:fail] = "חלה שגיאה. אנא נסה שוב."
+    end
+    redirect_to :back
+  end
 
   def shopping_list_params
     params.require(:shopping_list).permit(:title)

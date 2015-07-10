@@ -6,7 +6,15 @@
             <%= image_tag "To-do_List-256.png", size: "64x64" %>
         <% end %>
         <div class="caption">
-            <h3><%= shopping_list.title %></h3>
+            <h3 class="<%= "shopping-list-bought" if shopping_list.was_bought %>"><%= shopping_list.title %></h3>
+            <p>
+                <span class="was-bought">נקנה?</span>
+                <% if shopping_list.was_bought? %>
+                    <span class="glyphicon glyphicon-ok shopping-list-bought was-bought-mark"></span>
+                <% else %>
+                    <span class="glyphicon glyphicon-remove was-bought-mark"></span>
+                <% end %>
+            </p>
             <p>נוצר על ידי <%= shopping_list.user.name %> בתאריך <%= shopping_list.created_at.strftime("%d/%m/%Y %H:%M") %></p>
             <p>
                 <%= link_to "פרטים", shopping_list_path(shopping_list), class: "btn btn-primary" %>

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
         post :add_to_list
       end
     end
+    member do
+      post :bought
+      post :un_bought
+    end
   end
 
   resources :presets do

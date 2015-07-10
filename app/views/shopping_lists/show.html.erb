@@ -1,46 +1,55 @@
 <div class="bottom-space">
-	<h1 class="inline left-space-big"><%= @shopping_list.title %></h1>
+	<h1 class="inline left-space-big <%= "shopping-list-bought" if @shopping_list.was_bought? %>"><%= @shopping_list.title %></h1>
 	<% if @shopping_list.user.id == current_user.id %>
 		<a href="#" class="left-space" data-toggle="modal" data-target="#shoppingListFormModal"><span class="glyphicon glyphicon-edit light-black glyphicon-big"></span></a>
-		<%= link_to @shopping_list, method: :delete, data: { confirm: 'אתה בטוח?' } do %>
+		<%= link_to @shopping_list, method: :delete, data: { confirm: 'אתה בטוח?' }, class: "left-space-big" do %>
 			<span class="glyphicon glyphicon-trash light-black glyphicon-big"></span><% end %>
-  	<%= render partial: "shopping_lists/form_modal", locals: { shopping_list: @shopping_list } %>
 	<% end %>
+	<% if @shopping_list.was_bought? %>
+		<%= link_to un_bought_shopping_list_path(@shopping_list), method: :post, class: "btn btn-default bought-status-button" do %>
+			סמן כלא נקנה<span class="glyphicon glyphicon-remove right-space" style="top: 3px"></span><% end %>
+	<% else %>
+		<%= link_to bought_shopping_list_path(@shopping_list), method: :post, class: "btn btn-default bought-status-button" do %>
+			סמן כנקנה<span class="glyphicon glyphicon-ok shopping-list-bought right-space"></span><% end %>
+	<% end %>
+  <%= render partial: "shopping_lists/form_modal", locals: { shopping_list: @shopping_list } %>
 </div>
 
 <%= render partial: "shopping_lists/products/products", locals: { products: @products } %>
 
-<h3>הוסף מוצר בודד או <a href="#addFromPreset">ממועדפים</a></h3>
-<div class="row">
-	<div class="col-md-6">
-		<%= render partial: "products/form", locals: { product_container: @shopping_list, product: @new_product } %>
-	</div>
-	<div class="col-md-12">
-		<h3 id="addFromPreset">הוסף ממועדפים</h3>	
-	</div>
-	<div class="col-md-6">
-		<% if @presets && @presets.any? %>
-			<div class="row">
-				<div class="col-md-6 search-form">
-					<%= form_tag(shopping_list_presets_path(@shopping_list), :method => "get", id: "presetsSearch") do %>
-						<%= hidden_field_tag :shopping_list_id, @shopping_list.id %>
-					  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
-					<% end %>
+<% if !@shopping_list.was_bought? %>
+	<h3>הוסף מוצר בודד או <a href="#addFromPreset">ממועדפים</a></h3>
+	<div class="row">
+		<div class="col-md-6">
+			<%= render partial: "products/form", locals: { product_container: @shopping_list, product: @new_product } %>
+		</div>
+		<div class="col-md-12">
+			<h3 id="addFromPreset">הוסף ממועדפים</h3>	
+		</div>
+		<div class="col-md-6">
+			<% if @presets && @presets.any? %>
+				<div class="row">
+					<div class="col-md-6 search-form">
+						<%= form_tag(shopping_list_presets_path(@shopping_list), :method => "get", id: "presetsSearch") do %>
+							<%= hidden_field_tag :shopping_list_id, @shopping_list.id %>
+						  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "חפש במועדפים" %>
+						<% end %>
+					</div>
 				</div>
-			</div>
+				
+				<div id="presets">
+					<%= render partial: "shopping_lists/presets/preset", collection: @presets , locals: { shopping_list: @shopping_list } %>
+					<%= js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', params: { controller: "shopping_lists/presets", action: "index", shopping_list_id: @shopping_list.id } %>
+				</div>
+				
+			<% else %>
+				<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
+			<% end %>
 			
-			<div id="presets">
-				<%= render partial: "shopping_lists/presets/preset", collection: @presets , locals: { shopping_list: @shopping_list } %>
-				<%= js_will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא', params: { controller: "shopping_lists/presets", action: "index", shopping_list_id: @shopping_list.id } %>
-			</div>
-			
-		<% else %>
-			<p>לא קיימים מועדפים. היה הראשון ליצור!</p>
-		<% end %>
-		
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
-		  צור מועדף חדש
-		</button>
-		<%= render partial: "presets/form_modal", locals: { preset: Preset.new } %>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presetFormModal">
+			  צור מועדף חדש
+			</button>
+			<%= render partial: "presets/form_modal", locals: { preset: Preset.new } %>
+		</div>
 	</div>
-</div>
+<% end %>
