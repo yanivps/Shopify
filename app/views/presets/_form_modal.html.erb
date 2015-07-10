@@ -1,4 +1,4 @@
-<%= form_for Preset.new do |f| %>
+<%= form_for Preset.new, html: {onsubmit: "return Preset.validateNewPresetForm();"} do |f| %>
   <div class="modal fade" id="presetFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

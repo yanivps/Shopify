@@ -18,6 +18,12 @@ var Preset = {
 
 			return false;
 		})
+	},
+	validateNewPresetForm: function() {
+		if ($("#preset_title").val() == "") {
+			$("#preset_title").parent().addClass('has-error')
+			return false;
+		}
 	}
 }
 
