@@ -1,17 +1,23 @@
 <h1>רשימות קניה</h1>
 
-<div class="row">
-	<div class="col-md-12 bottom-space">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingListFormModal">
-		  צור רשימה חדשה
-		</button>
+<% if @shopping_lists && @shopping_lists.any? %>
+	<div class="row">
+		<div class="col-md-12 bottom-space">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingListFormModal">
+			  צור רשימה חדשה
+			</button>
+		</div>
 	</div>
-</div>
 
-<div class="row text-center">
-  <%= render @shopping_lists %>
-</div>
-<%= will_paginate @shopping_lists, :previous_label => 'הקודם', :next_label => 'הבא' %>
-
+	<div class="row text-center">
+	  <%= render @shopping_lists %>
+	</div>
+	<%= will_paginate @shopping_lists, :previous_label => 'הקודם', :next_label => 'הבא' %>
+<% else %>
+	<p>לא קיימות רשימות קנייה. היה הראשון ליצור!</p>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingListFormModal">
+	  צור רשימה חדשה
+	</button>
+<% end %>
 
 <%= render partial: "shopping_lists/form_modal", locals: { shopping_list: ShoppingList.new } %>
