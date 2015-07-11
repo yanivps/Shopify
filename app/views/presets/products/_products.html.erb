@@ -3,7 +3,7 @@
 <% else %>
 	<%= form_for :product, method: :put, html: { id: "product-form" } do |f| %>
 		<div id="products-list">	
-			<table class="table table-striped table-condensed">
+			<table class="table table-striped table-condensed tablesaw tablesaw-stack" data-tablesaw-mode="stack">
 				<thead>
 					<tr>
 						<th></th>

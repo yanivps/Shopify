@@ -37,6 +37,17 @@ var ShoppingList = {
 
 		Utils.registerClearModalDataOnDismiss($('#shoppingListFormModal'));
   		Utils.disableSubmitOnEnter($("#presetsSearch"));
+
+		enquire.register("screen and (max-width:39.9375em)", {
+			match : function() {
+				$("#products-list>table").removeClass("table table-striped table-condensed");
+				$("#products-list>table>tbody").addClass("border-top")
+			},
+			unmatch : function() {
+				$("#products-list>table").addClass("table table-striped table-condensed");
+				$("#products-list>table>tbody").removeClass("border-top")
+			}
+		});
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
