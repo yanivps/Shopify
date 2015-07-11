@@ -13,6 +13,7 @@ class ShoppingLists::PresetsController < ApplicationController
       preset.products.each do |product|
         new_product = Product.new(product.attributes.except("id", "preset_id", "created_at", "updated_at"))
         new_product.user = current_user
+        new_product.image = product.image
         new_product.measure = Measure.new(unit: product.measure.unit, quantity: product.measure.quantity)
         new_product.shopping_list = shopping_list
         success = new_product.save
