@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       post :bought
       post :un_bought
+      get :buy
     end
   end
 

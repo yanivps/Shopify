@@ -50,6 +50,10 @@ class ShoppingListsController < ApplicationController
     set_bought false
   end
 
+  def buy
+    @shopping_list = ShoppingList.find(params[:id])
+  end
+
   private
 
   def set_bought(status)

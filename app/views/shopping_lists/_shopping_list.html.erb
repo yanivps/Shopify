@@ -18,6 +18,7 @@
             <p>נוצר על ידי <%= shopping_list.user.name %> בתאריך <%= shopping_list.created_at.strftime("%d/%m/%Y %H:%M") %></p>
             <p>
                 <%= link_to "פרטים", shopping_list_path(shopping_list), class: "btn btn-primary" %>
+                <%= link_to "מצב קנייה", buy_shopping_list_path(shopping_list), class: "btn btn-primary" %>
             </p>
         </div>
     </div>
