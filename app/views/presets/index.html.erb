@@ -20,7 +20,7 @@
 	
 	<div id="presets">
 		<%= render @presets %>
-		<%= will_paginate @presets, :previous_label => 'הקודם', :next_label => 'הבא' %>
+		<%= will_paginate @presets, renderer: BootstrapPagination::Rails, :previous_label => 'הקודם', :next_label => 'הבא' %>
 	</div>
 <% else %>
 	<p>לא קיימים מועדפים. היה הראשון ליצור!</p>

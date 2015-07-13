@@ -1,5 +1,5 @@
 module WillPaginateHelper
-  class WillPaginateJSLinkRenderer < WillPaginate::ActionView::LinkRenderer
+  class WillPaginateJSLinkRenderer < BootstrapPagination::Rails
     def prepare(collection, options, template)
       options[:params] ||= {}
       options[:params]['_'] = nil
