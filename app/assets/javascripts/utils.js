@@ -11,5 +11,12 @@ var Utils = {
 			$(this).find("input").not(':submit').val('').end()
 			$(this).find('.has-error').removeClass('has-error')
 		});
+	},
+	attachFancyBox: function() {
+		$(".fancybox").fancybox();
 	}
 }
+
+$(document).ready(function() {
+	Utils.attachFancyBox();
+});
