@@ -1,9 +1,9 @@
 var Utils = {
 	disableSubmitOnEnter: function(form) {
 		$(form).on("keypress", function (e) {
-		    if (e.keyCode == 13) {
-		        return false;
-		    }
+			if (e.keyCode == 13) {
+				return false;
+			}
 		});
 	},
 	registerClearModalDataOnDismiss: function(modal) {
@@ -13,7 +13,13 @@ var Utils = {
 		});
 	},
 	attachFancyBox: function() {
-		$(".fancybox").fancybox();
+		$(".fancybox").fancybox(
+			helpers: {
+				overlay: {
+					locked: false
+				}
+			}
+		});
 	}
 }
 
