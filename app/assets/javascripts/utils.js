@@ -13,7 +13,8 @@ var Utils = {
 		});
 	},
 	attachFancyBox: function() {
-		$(".fancybox").fancybox(
+		$(".fancybox").fancybox({
+			padding: 0,
 			helpers: {
 				overlay: {
 					locked: false
