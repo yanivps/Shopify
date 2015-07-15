@@ -14,10 +14,12 @@ var Utils = {
 	},
 	attachFancyBox: function() {
 		$(".fancybox").fancybox({
-			padding: 0,
-			helpers: {
-				overlay: {
-					locked: false
+			padding: 5,
+			openEffect : 'none',
+			closeEffect	: 'none',
+			helpers : {
+				title : {
+					type : 'float'
 				}
 			}
 		});

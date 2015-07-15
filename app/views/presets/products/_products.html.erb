@@ -47,7 +47,16 @@
 								</div>
 							</td>
 							<td><%= product.user.name %></td>
-							<td><%= link_to image_tag(product.image.thumb.url), product.image.url if product.image? %></td>
+							<td>
+								<div class='product-field'>
+									<% if product.image? %>
+										<%= link_to image_tag(product.image.thumb.url), product.image.url, class: "fancybox", title: product.title %>
+									<% end %>
+								</div>
+								<div class='control-wrapper hide'>
+									<%= f.file_field :image %>
+								</div>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html dir='rtl'>
+<html >
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shopify</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+
+
 </head>
-<body>
+<body style="direction: ltr">
+<!-- This div should be direct and only child of body. it allows body to be direction left to right to fix fancybox scroll up bug on mobile and the rest of the app to be right to left -->
+<div style="direction: rtl">
 
-
-	<!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top flip" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -63,22 +66,22 @@
     <!-- Page Content -->
     <div class="container">
 
-		<% if flash[:notice] %>
-			<div class="alert alert-success">
-				<button class="close" data-dismiss="alert">&times;</button>
-				<%= flash[:notice] %>
-			</div>
-		<% elsif flash[:error] %>
-			<div class="alert alert-danger">
-				<button class="close" data-dismiss="alert">&times;</button>
-				<%= flash[:error] %>
-			</div>
-		<% elsif flash[:alert] %>
-			<div class="alert alert-warning">
-				<button class="close" data-dismiss="alert">&times;</button>
-				<%= flash[:alert] %>
-			</div>
-		<% end %>
+        <% if flash[:notice] %>
+            <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">&times;</button>
+                <%= flash[:notice] %>
+            </div>
+        <% elsif flash[:error] %>
+            <div class="alert alert-danger">
+                <button class="close" data-dismiss="alert">&times;</button>
+                <%= flash[:error] %>
+            </div>
+        <% elsif flash[:alert] %>
+            <div class="alert alert-warning">
+                <button class="close" data-dismiss="alert">&times;</button>
+                <%= flash[:alert] %>
+            </div>
+        <% end %>
 
         <%= yield %>
         <!-- /.row -->
@@ -97,5 +100,6 @@
     </div>
     <!-- /.container -->
 
+</div>
 </body>
 </html>
