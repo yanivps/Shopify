@@ -1,4 +1,4 @@
-class ShoppingLists::ProductsController < ProductsControllerBase
+class ShoppingLists::ProductsController < ProductsBaseController
   def create
     @new_product = super
     @shopping_list = ShoppingList.find(params[:shopping_list_id])

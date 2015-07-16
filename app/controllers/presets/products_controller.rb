@@ -1,4 +1,4 @@
-class Presets::ProductsController < ProductsControllerBase
+class Presets::ProductsController < ProductsBaseController
   def create
     @new_product = super
     @preset = Preset.find(params[:preset_id])

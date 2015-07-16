@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     resources :products, only: [:create, :update, :destroy], controller: "presets/products"
   end
 
+  resources :products, only: [], controller: "products_base" do
+    member do
+      delete :remove_image
+    end
+  end
+
   devise_for :users
 
   resources :users, only: [:update]
