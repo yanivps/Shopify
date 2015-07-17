@@ -15,15 +15,19 @@
   <%= render partial: "shopping_lists/form_modal", locals: { shopping_list: @shopping_list } %>
 </div>
 
-<%= render partial: "shopping_lists/products/products", locals: { products: @products } %>
-
 <% if !@shopping_list.was_bought? %>
 	<h3>הוסף מוצר בודד או <a href="#addFromPreset">ממועדפים</a></h3>
 	<div class="row">
 		<div class="col-md-6">
 			<%= render partial: "products/form", locals: { product_container: @shopping_list, product: @new_product } %>
 		</div>
-		<div class="col-md-12">
+	</div>
+<% end %>
+
+<%= render partial: "shopping_lists/products/products", locals: { products: @products } %>
+
+<% if !@shopping_list.was_bought? %>
+	<div class="col-md-12">
 			<h3 id="addFromPreset">הוסף ממועדפים</h3>	
 		</div>
 		<div class="col-md-6">
@@ -51,5 +55,4 @@
 			</button>
 			<%= render partial: "presets/form_modal", locals: { preset: Preset.new } %>
 		</div>
-	</div>
 <% end %>

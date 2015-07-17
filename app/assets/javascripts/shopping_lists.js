@@ -48,6 +48,8 @@ var ShoppingList = {
 				$("#products-list>table>tbody").removeClass("border-top")
 			}
 		});
+
+		self.registerWasBoughtCheckBox();
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
@@ -94,6 +96,15 @@ var ShoppingList = {
 			$("#shopping_list_title").parent().addClass('has-error')
 			return false;
 		}
+	},
+	registerWasBoughtCheckBox: function() {
+		$('.was_bought_checkbox').on("click", function(event) {
+			if ($(this).prop('checked')) {
+				$(this).closest('tr').addClass('product-bought')
+			} else{
+				$(this).closest('tr').removeClass('product-bought')
+			}
+		})
 	}
 }
 
