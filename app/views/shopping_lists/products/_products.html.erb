@@ -51,7 +51,7 @@
 							<td><%= product.created_at.strftime("%d/%m/%Y %H:%M") %></td>
 							<td>
 								<% if product.image? %>
-									<%= link_to image_tag(product.image.thumb.url), product.image.url, class: " inline", title: product.title %>
+									<%= link_to image_tag(product.image.thumb.url), product.image.url, class: "fancybox inline", title: product.title %>
 									<%= link_to remove_image_product_path(product), method: :delete, data: { confirm: 'אתה בטוח שברצונך להסיר את התמונה?' }, class: "control-wrapper hide" do %><span class="glyphicon glyphicon-remove"></span><% end %>
 								<% end %>
 								<div class='control-wrapper inline hide'>
