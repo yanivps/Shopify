@@ -3,14 +3,23 @@
 		<tr>
 			<th></th>
 			<th>שם המוצר</th>
+			<th></th>
+			<th></th>
 			<th>כמות</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% products.each do |product| %>
 			<tr>
-				<td><input type="checkbox" class="was_bought_checkbox" id="<%= product.id %>" /></td>
+				<td><input type="checkbox" class="was_bought_checkbox" id="was_bought_cb_p_<%= product.id %>" /></td>
 				<td><%= product.title %></td>
+				<td>
+					<% if product.description? %>
+						<a href="#popup_<%= product.id %>" data-toggle="modal" data-target="#infoModalProduct<%= product.id %>"><span class="glyphicon glyphicon-info-sign light-black"></span></a>
+						<%= render partial: "products/product_info_modal", locals: {product: product} %>
+					<% end %>
+				</td>
+				<td><% if product.image? %><a href="<%= product.image.url %>" title="<%= product.title %>" class="fancybox"><span class="glyphicon glyphicon-picture light-black"></span></a><% end %></td>
 				<td><%= measure_in_words(product.measure) %></td>
 			</tr>
 		<% end %>

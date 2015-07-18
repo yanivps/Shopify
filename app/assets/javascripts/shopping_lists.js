@@ -31,12 +31,12 @@ var ShoppingList = {
 		});
 
 		$("#presetsSearch input").keyup(function() {
-	    	$.get($("#presetsSearch").attr("action"), $("#presetsSearch").serialize(), null, "script");
-	    	return false;
-  		});
+			$.get($("#presetsSearch").attr("action"), $("#presetsSearch").serialize(), null, "script");
+			return false;
+		});
 
 		Utils.registerClearModalDataOnDismiss($('#shoppingListFormModal'));
-  		Utils.disableSubmitOnEnter($("#presetsSearch"));
+		Utils.disableSubmitOnEnter($("#presetsSearch"));
 
 		enquire.register("screen and (max-width:39.9375em)", {
 			match : function() {
@@ -50,6 +50,9 @@ var ShoppingList = {
 		});
 
 		self.registerWasBoughtCheckBox();
+
+		//TODO: Move to specific buy page script
+		self.saveLoadBuyModeSettings();
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
@@ -98,17 +101,37 @@ var ShoppingList = {
 		}
 	},
 	registerWasBoughtCheckBox: function() {
-		$('.was_bought_checkbox').on("click", function(event) {
+		$('.was_bought_checkbox').change(function(event) {
 			if ($(this).prop('checked')) {
 				$(this).closest('tr').addClass('product-bought')
 			} else{
 				$(this).closest('tr').removeClass('product-bought')
 			}
 		})
+	},
+	saveLoadBuyModeSettings: function() {
+		$(window).unload(saveSettings);
+		loadSettings();
+
+		function loadSettings() {
+			if (localStorage.boughtProductIds) {
+				$.each(localStorage.boughtProductIds.split(';'), function(index, value) {
+					$('#' + value).click();
+				});
+			}
+		}
+
+		function saveSettings() {
+			localStorage.boughtProductIds = "";
+			$('.was_bought_checkbox').each(function() {
+				if ($(this).prop('checked')) {
+					localStorage.boughtProductIds += $(this).attr('id') + ";";
+				}
+			});
+		}
 	}
 }
 
-
 $(document).on("ready", function() {
-  ShoppingList.init();
+	ShoppingList.init();
 });

@@ -196,7 +196,7 @@ he:
   measure:
     items: "יחידות"
     grams: "גרם"
-    kilograms: "קילוגרם"
+    kilograms: 'ק"ג'
     mililiters: "מיליליטר"
     liters: "ליטר"
     other: "אחר"
