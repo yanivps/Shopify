@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720202714) do
+ActiveRecord::Schema.define(version: 20150720210905) do
 
   create_table "measures", force: :cascade do |t|
     t.integer  "unit",       limit: 4,  default: 0, null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150720202714) do
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
     t.boolean  "email_notifications",    limit: 1,   default: true
+    t.string   "role",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
