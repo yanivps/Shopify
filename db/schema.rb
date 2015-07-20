@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704233621) do
+ActiveRecord::Schema.define(version: 20150720202714) do
 
   create_table "measures", force: :cascade do |t|
     t.integer  "unit",       limit: 4,  default: 0, null: false
@@ -54,8 +54,10 @@ ActiveRecord::Schema.define(version: 20150704233621) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "image",      limit: 255
+    t.integer  "buyer_id",   limit: 4
   end
 
+  add_index "shopping_lists", ["buyer_id"], name: "index_shopping_lists_on_buyer_id", using: :btree
   add_index "shopping_lists", ["user_id"], name: "index_shopping_lists_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

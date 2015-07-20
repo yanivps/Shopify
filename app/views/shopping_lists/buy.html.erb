@@ -1,4 +1,12 @@
-<h1><%= @shopping_list.title %></h1>
-<%= render partial: "products/products_minimal", locals: { products: @shopping_list.products } %>
+  <%= javascript_include_tag '/javascripts/buy' %>
 
-<%= link_to "סיים קנייה", "#", class: "btn btn-primary" %>
+<h1><%= @shopping_list.title %></h1>
+
+<% if !@shopping_list.products.any? %>
+	<h3><strong>הרשימה ריקה</strong></h3>
+<% else %>
+	<%= form_tag action: :buy_complete, method: :post do %>
+		<%= render partial: "products/products_minimal", locals: { products: @shopping_list.products } %>
+		<%= submit_tag "סיים קנייה", class: "btn btn-primary" %>
+	<% end %>
+<% end %>

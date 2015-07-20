@@ -7,10 +7,14 @@ Rails.application.routes.draw do
         post :add_to_list
       end
     end
+    collection do
+      get :history
+    end
     member do
       post :bought
       post :un_bought
       get :buy
+      post :buy_complete
     end
   end
 

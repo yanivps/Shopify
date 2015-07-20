@@ -1,6 +1,6 @@
 class ShoppingListsController < ApplicationController  
   def index
-    @shopping_lists = ShoppingList.paginate(page: params[:page], per_page: 8)
+    @shopping_lists = ShoppingList.un_bought.paginate(page: params[:page], per_page: 8)
   end
 
   def show
@@ -42,6 +42,10 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def history
+    @bought_shopping_lists = ShoppingList.bought.paginate(page: params[:page], per_page: 8)
+  end
+
   def bought
     set_bought true
   end
@@ -54,11 +58,51 @@ class ShoppingListsController < ApplicationController
     @shopping_list = ShoppingList.find(params[:id])
   end
 
+  def buy_complete
+    shopping_list = ShoppingList.find(params[:id])
+
+    product_ids = params.keys.select { |key| key.start_with? "was_bought_cb_p_" }.map { |key| key.sub "was_bought_cb_p_", "" }
+    flash[:alert] = "לא סומן אף מוצר כנקנה"
+    if product_ids.empty?
+      redirect_to :back 
+      return
+    end
+    
+    products = Product.find(product_ids)
+    bought_shopping_list = ShoppingList.create(
+      title: Time.now.strftime("%d/%m/%Y %H:%M"), 
+      user: shopping_list.user, 
+      was_bought: true, 
+      created_at: shopping_list.created_at, 
+      buyer: current_user)
+
+    ActiveRecord::Base.transaction do
+      products.each do |product|
+        if !product.update_attributes(shopping_list: bought_shopping_list)
+          bought_shopping_list.destroy
+          flash[:error] = "הפעולה נכשלה."
+          redirect_to buy_shopping_list_path
+          return
+        end
+      end
+    end
+
+    shopping_list.destroy if shopping_list.products.count == 0
+
+    flash[:notice] = "תודה שקנית עם Shopify!"
+    redirect_to root_path
+  end
+
   private
 
   def set_bought(status)
     shopping_list = ShoppingList.find(params[:id])
-    if !shopping_list.update_attributes(was_bought: status)
+    if status
+      shopping_list.buyer = current_user
+    end
+    shopping_list.was_bought = status
+    
+    if !shopping_list.save
       flash[:fail] = "חלה שגיאה. אנא נסה שוב."
     end
     redirect_to :back

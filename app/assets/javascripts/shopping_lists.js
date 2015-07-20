@@ -48,11 +48,6 @@ var ShoppingList = {
 				$("#products-list>table>tbody").removeClass("border-top")
 			}
 		});
-
-		self.registerWasBoughtCheckBox();
-
-		//TODO: Move to specific buy page script
-		self.saveLoadBuyModeSettings();
 	},
 	enterEditMode: function (parent) {
 		$(parent).find('.control-wrapper').each(function() {
@@ -98,36 +93,6 @@ var ShoppingList = {
 		if ($("#shopping_list_title").val() == "") {
 			$("#shopping_list_title").parent().addClass('has-error')
 			return false;
-		}
-	},
-	registerWasBoughtCheckBox: function() {
-		$('.was_bought_checkbox').change(function(event) {
-			if ($(this).prop('checked')) {
-				$(this).closest('tr').addClass('product-bought')
-			} else{
-				$(this).closest('tr').removeClass('product-bought')
-			}
-		})
-	},
-	saveLoadBuyModeSettings: function() {
-		$(window).unload(saveSettings);
-		loadSettings();
-
-		function loadSettings() {
-			if (localStorage.boughtProductIds) {
-				$.each(localStorage.boughtProductIds.split(';'), function(index, value) {
-					$('#' + value).click();
-				});
-			}
-		}
-
-		function saveSettings() {
-			localStorage.boughtProductIds = "";
-			$('.was_bought_checkbox').each(function() {
-				if ($(this).prop('checked')) {
-					localStorage.boughtProductIds += $(this).attr('id') + ";";
-				}
-			});
 		}
 	}
 }
