@@ -1,6 +1,6 @@
 <div class="bottom-space">
 	<h1 class="inline left-space-big <%= "shopping-list-bought" if @shopping_list.was_bought? %>"><%= @shopping_list.title %></h1>
-	<% if !@shopping_list.was_bought? && @shopping_list.user.id == current_user.id %>
+	<% if (!@shopping_list.was_bought? && @shopping_list.user.id == current_user.id) || current_user.role == 'admin'%>
 		<a href="#" class="left-space" data-toggle="modal" data-target="#shoppingListFormModal"><span class="glyphicon glyphicon-edit light-black glyphicon-big"></span></a>
 		<%= link_to @shopping_list, method: :delete, data: { confirm: 'אתה בטוח?' }, class: "left-space-big" do %>
 			<span class="glyphicon glyphicon-trash light-black glyphicon-big"></span><% end %>
