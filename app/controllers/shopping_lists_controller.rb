@@ -35,10 +35,13 @@ class ShoppingListsController < ApplicationController
     shopping_list = ShoppingList.find(params[:id])
     if shopping_list.destroy
       flash[:notice] = "הרשימה \"#{shopping_list.title}\" נמחקה."
-      redirect_to root_path
     else
       flash[:fail] = "חלה שגיאה במחיקת הרשימה. אנא נסה שוב."
-      redirect_to :back
+    end
+    if shopping_list.was_bought?
+      redirect_to history_shopping_lists_path
+    else
+      redirect_to shopping_lists_path
     end
   end
 
