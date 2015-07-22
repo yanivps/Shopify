@@ -1,6 +1,9 @@
   <%= javascript_include_tag '/javascripts/buy' %>
 
-<h1><%= @shopping_list.title %></h1>
+<div class="shopping-list-heading bottom-space">
+	<h1 class="inline left-space-big"><%= @shopping_list.title %></h1>
+	<%= link_to "פרטים", shopping_list_path(@shopping_list), class: "btn btn-primary" %>
+</div>
 
 <% if !@shopping_list.products.any? %>
 	<h3><strong>הרשימה ריקה</strong></h3>

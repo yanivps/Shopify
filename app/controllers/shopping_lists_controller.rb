@@ -73,7 +73,7 @@ class ShoppingListsController < ApplicationController
     
     products = Product.find(product_ids)
     bought_shopping_list = ShoppingList.create(
-      title: Time.now.strftime("%d/%m/%Y %H:%M"), 
+      title: Time.now.in_time_zone("Jerusalem").strftime("%d/%m/%Y %H:%M"), 
       user: shopping_list.user, 
       was_bought: true, 
       created_at: shopping_list.created_at, 
