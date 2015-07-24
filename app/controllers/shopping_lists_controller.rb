@@ -59,6 +59,9 @@ class ShoppingListsController < ApplicationController
 
   def buy
     @shopping_list = ShoppingList.find(params[:id])
+    if @shopping_list.was_bought?
+      redirect_to @shopping_list
+    end
   end
 
   def buy_complete

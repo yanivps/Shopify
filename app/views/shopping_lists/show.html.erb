@@ -14,7 +14,9 @@
 				סמן כנקנה<span class="glyphicon glyphicon-ok shopping-list-bought right-space"></span><% end %>
 		<% end %>
 	<% end %>
-	<%= link_to "מצב קנייה", buy_shopping_list_path(@shopping_list), class: "btn btn-primary" %>
+	<% if !@shopping_list.was_bought? %>
+		<%= link_to "מצב קנייה", buy_shopping_list_path(@shopping_list), class: "btn btn-primary" %>
+	<% end %>
 </div>
 
 <%= render partial: "shopping_lists/form_modal", locals: { shopping_list: @shopping_list } %>
