@@ -38,6 +38,8 @@ gem 'pundit'
 
 # Image upload
 gem 'carrierwave'
+gem 'cloudinary'
+
 # Image processing
 gem 'mini_magick'
 
