@@ -1,18 +1,18 @@
 development:
   cloud_name: yaniv
-  api_key: '381338679199658'
-  api_secret: x4_96vVkNa5rIWykUNaYDe6YaD0
+  api_key: '481332738969466'
+  api_secret: <%= ENV["CLOUDINARY_API_SECRET"] %>
   enhance_image_tag: true
   static_image_support: false
 production:
   cloud_name: yaniv
-  api_key: '381338679199658'
-  api_secret: x4_96vVkNa5rIWykUNaYDe6YaD0
+  api_key: '481332738969466'
+  api_secret: <%= ENV["CLOUDINARY_API_SECRET"] %>
   enhance_image_tag: true
   static_image_support: true
 test:
   cloud_name: yaniv
-  api_key: '381338679199658'
-  api_secret: x4_96vVkNa5rIWykUNaYDe6YaD0
+  api_key: '481332738969466'
+  api_secret: <%= ENV["CLOUDINARY_API_SECRET"] %>
   enhance_image_tag: true
   static_image_support: false
