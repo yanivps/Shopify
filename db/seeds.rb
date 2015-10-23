@@ -20,15 +20,16 @@ ShoppingList.create!(title: "רשימה דחופה!", user: alon)
 
 lists = ShoppingList.all
 
+categories = ["מוצרי חלב", "מאפים", "ניקיון", "חטיפים", "חטיפים2", "חטיפים3", "חטיפים4", "חטיפים5", "חטיפים6", "חטיפים7", "פירות וירקות"]
 
-Product.create!(title: "טבסקו", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :items))
-Product.create!(title: "ספרייט", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1.5, unit: :liters))
-Product.create!(title: "קוטג' 9%", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 1, unit: :items))
-Product.create!(title: "שיבולת שועל", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 750, unit: :grams))
-Product.create!(title: "קמח רגיל", description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :kilograms))
+Product.create!(title: "טבסקו", category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :items))
+Product.create!(title: "ספרייט", category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1.5, unit: :liters))
+Product.create!(title: "קוטג' 9%", category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 1, unit: :items))
+Product.create!(title: "שיבולת שועל", category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: alon, measure: Measure.new(quantity: 750, unit: :grams))
+Product.create!(title: "קמח רגיל", category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: yaniv, measure: Measure.new(quantity: 1, unit: :kilograms))
 
 15.times do
-  Product.create!(title: Faker::Commerce.product_name, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
+  Product.create!(title: Faker::Commerce.product_name, category: categories.sample, description: Faker::Lorem.sentence, shopping_list: lists.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
 end
 
 15.times do
@@ -36,7 +37,7 @@ end
 end
 presets = Preset.all
 15.times do
-  Product.create!(title: Faker::Commerce.product_name, description: Faker::Lorem.sentence, preset: presets.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
+  Product.create!(title: Faker::Commerce.product_name, category: categories.sample, description: Faker::Lorem.sentence, preset: presets.sample, user: users.sample, measure: Measure.new(quantity: 1, unit: :items))
 end
 
 

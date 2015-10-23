@@ -8,6 +8,7 @@ class ShoppingListsController < ApplicationController
     @products = @shopping_list.products
     @presets = Preset.paginate(page: params[:page], per_page: 5)
     @new_product = Product.new
+    @categories_json = Product.select(:category).uniq.map(&:category).compact.to_json
   end
 
   def create

@@ -1,6 +1,43 @@
 <% if !products.any? %>
 	<h3><strong>הרשימה ריקה</strong></h3>
 <% else %>
+
+
+<script type="text/javascript">
+	$(function() {
+	  // Below is the name of the textfield that will be autocomplete    
+	  $('.category_box').autocomplete({
+	      // This shows the min length of charcters that must be typed before the autocomplete looks for a match.
+	      minLength: 1,
+	      // This is the source of the auocomplete suggestions. In this case a list of names from the people controller, in JSON format.
+	      source: <%= categories_json.html_safe %>,
+	      // This updates the textfield when you move the updown the suggestions list, with your keyboard. In our case it will reflect the same value that you see in the suggestions which is the person.given_name.
+	      focus: function(event, ui) {
+	        // $('#select_origin').val(ui.item.person.given_name);
+	        return false;
+	      },
+	      // Once a value in the drop down list is selected, do the following:
+	      select: function(event, ui) {
+	        // place the person.given_name value into the textfield called 'select_origin'...
+	        // $('#select_origin').val(ui.item.person.given_name);
+	        // and place the person.id into the hidden textfield called 'link_origin_id'. 
+	        // $('#link_origin_id').val(ui.item.person.id);
+	        return false;
+	      }
+	    })
+	    // The below code is straight from the jQuery example. It formats what data is displayed in the dropdown box, and can be customized.
+	    // .data("autocomplete")._renderItem = function(ul, item) {
+	    //   return $("<li></li>")
+	    //     .data("item.autocomplete", item)
+	    //     // For now which just want to show the person.given_name in the list.
+	    //     .append("<a>" + item.person.given_name + "</a>")
+	    //     .appendTo(ul);
+	    // };
+	});
+</script>
+
+
+
 	<%= form_for :product, method: :put, html: { id: "product-form" } do |f| %>
 		<div id="products-list">	
 			<table class="table table-striped table-condensed tablesaw tablesaw-stack" data-tablesaw-mode="stack">
@@ -10,6 +47,7 @@
 						<th>שם המוצר</th>
 						<th>הערות</th>
 						<th>כמות</th>
+						<th>קטגוריה</th>
 						<th>מבקש</th>
 						<th>נוסף בתאריך</th>
 						<th>תמונה</th>
@@ -45,6 +83,13 @@
 								<div class='form-inline control-wrapper hide'>
 									<%= text_field_tag :quantity, quantity_with_precision(product.measure), disabled: :disabled, class: "form-control", style: "width: 75px" %>
 									<%= select_tag(:unit, options_for_select(Measure.units.map { |k,v| [t("measure.#{k}"), v] }, Measure.units[product.measure.unit]), { disabled: :disabled }) %>
+								</div>
+							</td>
+							<td>
+								<div class='product-field'><%= product.category %></div>
+								<div class='control-wrapper hide'>
+									<input class="category_box"/>
+									<!-- <%= f.text_field :category, value: product.category, disabled: :disabled, class: "form-control" %> -->
 								</div>
 							</td>
 							<td><%= product.user.name if product.user %></td>

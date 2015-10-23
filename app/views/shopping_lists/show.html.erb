@@ -30,7 +30,7 @@
 	</div>
 <% end %>
 
-<%= render partial: "shopping_lists/products/products", locals: { products: @products } %>
+<%= render partial: "shopping_lists/products/products", locals: { products: @products, categories_json: @categories_json } %>
 
 <% if !@shopping_list.was_bought? %>
 	<div class="col-md-12">
