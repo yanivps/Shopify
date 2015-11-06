@@ -10,7 +10,7 @@
 	<% end %>
 	<div class='<%= form_has_error_class(product.errors[:title]) %>'>
 		<%= f.label :title %>
-		<%= f.text_field :title, class: 'form-control', placeholder: 'הכנס את שם המוצר' %>
+		<%= f.text_field :title, class: 'form-control', placeholder: 'הכנס את שם המוצר', :autofocus => true %>
 	</div>
 	<div class='form-group'>
 		<%= f.label :description %>
